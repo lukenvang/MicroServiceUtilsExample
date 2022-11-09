@@ -29,13 +29,13 @@ public class MDMServiceHelper {
         {
             headerMap = new Map<String, String> { 'Authorization' => 'Bearer ' + msiSettings.API_Key__c};
         }
-        String response = HttpRest.doCallout(msiSettings.Microservice_Endpoint__c, requestBody, recordId, headerMap);
+        String response = HttpRest.doCallout(msiSettings.Microservice_Endpoint__c, requestBody, msiSettings.Method__c, recordId, headerMap);
         return response;
     }
 
     private static MicroServiceIntegrationSettings__mdt  getMicroServiceIntegrationSettings(String serviceName){
         String environmentType = [SELECT isSandbox FROM Organization LIMIT 1].isSandbox ? 'Sandbox' : 'Production';
-        List<MicroServiceIntegrationSettings__mdt> msiSettings = [SELECT API_Key__c, Microservice_Endpoint__c, Source_Id__c FROM MicroServiceIntegrationSettings__mdt WHERE Microservice_Endpoint__c != null && Microservice_Endpoint_Enabled__c =: true AND MasterLabel =: serviceName AND Environment_Type__c =: environmentType];
+        List<MicroServiceIntegrationSettings__mdt> msiSettings = [SELECT API_Key__c, Microservice_Endpoint__c, Source_Id__c, Method__c FROM MicroServiceIntegrationSettings__mdt WHERE Microservice_Endpoint__c != null && Microservice_Endpoint_Enabled__c =: true AND MasterLabel =: serviceName AND Environment_Type__c =: environmentType];
         if(msiSettings.isEmpty()) throw new MicroServiceHelper('No enabled Microservice Integration Setting record found for service name : ' + serviceName);
         return msiSettings[0];
     }
