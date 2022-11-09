@@ -18,7 +18,7 @@ public class HttpRest {
             Http http = new Http();
             HttpResponse response = http.send(request);
             if(response != null) {
-                if((String.valueOf(response.getStatusCode()).startsWith('2') || !String.valueOf(response.getStatusCode()).startsWith('2'))&& response.getBody() != null) {
+                if((String.valueOf(response.getStatusCode()).startsWith('2') || !String.valueOf(response.getStatusCode()).startsWith('2')) && response.getBody() != null) {
                     resp = response.getBody();
                 }
             }
