@@ -11,10 +11,10 @@ There must be 2 created per API endpoint. One will point to production and the o
 The labels for each API endpoint for each environment must be the same, but the developer name must be unique to the targed environment. 
 The utility class will determine which API endpoint and target targeted environment to call.
 
-|Label|DeveloperName|End Point| Source Id| Help Desk Email Address | Enabled | Environment |
-| ---- | -----------| -------| ----------| ------------------------| ------- | ----------- | 
-| AccountCreated| AccountCreatedProd | https://example.com/ | 1234 | test@test.com | true | Production |
-| AccountCreated| AccountCreatedTest | https://example.com/ | 1234 | test@test.com | true | Sandbox |
+|Label|DeveloperName|End Point| Source Id| Help Desk Email Address | Enabled | Environment | Method | 
+| ---- | -----------| -------| ----------| ------------------------| ------- | ----------- | ------ | 
+| AccountCreated| AccountCreatedProd | https://example.com/ | 1234 | test@test.com | true | Production | POST | 
+| AccountCreated| AccountCreatedTest | https://example.com/ | 1234 | test@test.com | true | Sandbox | POST |
 
 # Examples
 
