@@ -1,6 +1,6 @@
 //Invocable method used to call MDM services from flows
 public class MDMMicroServiceHelperInvoke{
-    @InvocableMethod(label='Perform Call Out to Microservices' description='Performs call out to microservices' callout=true)
+    @InvocableMethod(label='Perform Call Out to MDM Microservices' description='Performs call out to MDM microservices' callout=true)
     public static List<String> callMicroService(String serviceName, String requestBody, Id recordId)
     {
         List<String> result;
