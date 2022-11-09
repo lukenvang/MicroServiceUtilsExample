@@ -1,11 +1,12 @@
 // HttpRest is a utility class used to make a external call out
 public class HttpRest {
 
-    public static String doCallout(String endpoint, String requestBody, Id recordId, Map<String, String> headerMap)
+    public static String doCallout(String endpoint, String requestBody, String method, Id recordId, Map<String, String> headerMap)
     {
         String resp;
         try{
             HttpRequest request = new HttpRequest();
+            request.setMethod(method);
             if(!String.isBlank(requestBody)) request.setBody(requestBody);
             if(headerMap != null && !headerMap.isEmpty())
             {
