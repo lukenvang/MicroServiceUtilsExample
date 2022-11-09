@@ -1,8 +1,6 @@
 // HttpRest is a utility class used to make a external call out
 public class HttpRest {
 
-    public class HttpRestException extends Exception {}
-
     public static String doCallout(String endpoint, String requestBody, Id recordId, Map<String, String> headerMap)
     {
         String resp;
