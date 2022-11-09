@@ -4,7 +4,7 @@ public class MDMServiceHelper {
 
     public static MicroServiceIntegrationSettings__mdt msiSettings;
 
-    public class MicroServiceHelper extends Exception {}
+    public class MDMServiceHelperException extends Exception {}
 
     //use to call MDM service synchronously
     public static String callMicroService(String serviceName, String requestBody, Id recordId){
@@ -36,7 +36,7 @@ public class MDMServiceHelper {
     private static MicroServiceIntegrationSettings__mdt  getMicroServiceIntegrationSettings(String serviceName){
         String environmentType = [SELECT isSandbox FROM Organization LIMIT 1].isSandbox ? 'Sandbox' : 'Production';
         List<MicroServiceIntegrationSettings__mdt> msiSettings = [SELECT API_Key__c, Microservice_Endpoint__c, Source_Id__c, Method__c FROM MicroServiceIntegrationSettings__mdt WHERE Microservice_Endpoint__c != null && Microservice_Endpoint_Enabled__c =: true AND MasterLabel =: serviceName AND Environment_Type__c =: environmentType];
-        if(msiSettings.isEmpty()) throw new MicroServiceHelper('No enabled Microservice Integration Setting record found for service name : ' + serviceName);
+        if(msiSettings.isEmpty()) throw new MDMServiceHelperException('No enabled Microservice Integration Setting record found for service name : ' + serviceName);
         return msiSettings[0];
     }
 
