@@ -7,6 +7,6 @@ public class IntegrationLogHelper {
     {
         if(request == null || response == null || recordId == null) return;
         String status = String.valueOf(response.getStatusCode()).startsWith('2') ? 'Success' : 'Fail';
-        insert new Integration_Log__c(Request_Body__c = request?.getBody(), Response_Body__c = response?.getBody(), Record_Id__c = recordId, Org_Name__c = UserInfo.getOrganizationId(), Object_API_NAme__c = recordId.getSobjectType());
+        insert new Integration_Log__c(Status__c = status, Request_Body__c = request?.getBody(), Response_Body__c = response?.getBody(), Record_Id__c = recordId, Org_Name__c = UserInfo.getOrganizationId(), Object_API_NAme__c = recordId.getSobjectType());
     }
 }
