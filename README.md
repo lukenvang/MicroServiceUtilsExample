@@ -9,7 +9,7 @@ These classes are created in such a way that the code has no hard checks for any
 Integration metadata records contain the data required to make API calls to the MDM services.
 There must be 2 created per API endpoint. One will point to production and the other to the test environment.
 The labels for each API endpoint for each environment must be the same, but the developer name must be unique to the targed environment. 
-The utility class will determine which API endpoint and target targeted environment to call.
+The utility classes will determine which API endpoint and target targeted environment to call.
 
 |Label|DeveloperName|End Point| Source Id| Help Desk Email Address | Enabled | Environment | Method | 
 | ---- | -----------| -------| ----------| ------------------------| ------- | ----------- | ------ | 
