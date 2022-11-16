@@ -20,9 +20,14 @@ The utility classes will determine which API endpoint and target targeted enviro
 
 ### Invocable Variables
 ```
-String recordId
-String requestBody
-String serviceName
+public class MDMMicroServiceHelperWrapper {
+    @InvocableVariable
+    public String serviceName;
+    @InvocableVariable
+    public String requestBody;
+    @InvocableVariable
+    public String recordId;
+}
 ```
 
 ### Synchronously 
