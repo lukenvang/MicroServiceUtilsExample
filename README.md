@@ -18,6 +18,13 @@ The utility classes will determine which API endpoint and target targeted enviro
 
 # Examples
 
+### Invocable Variables
+```
+String recordId
+String requestBody
+String serviceName
+```
+
 ### Synchronously 
 ```
 MDMServiceHelper.callMicroService('AccountCreated', '{"accountId" : "<local system id of the account>", "context" : "<account, vendor, broker, customer, guarantor>"}, "recordId");
@@ -25,7 +32,7 @@ MDMServiceHelper.callMicroService('AccountCreated', '{"accountId" : "<local syst
 
 ### Invocable Synchronously from flow
 ```
-MDMMicroServiceHelperInvoke.callMDMMicroService('AccountCreated', '{"accountId" : "<local system id of the account>", "context" : "<account, vendor, broker, customer, guarantor>"}, "recordId");
+MDMMicroServiceHelperInvoke.callMDMMicroService(List<MDMMicroServiceHelperWrapper> wrappers);
 ```
 
 
@@ -36,5 +43,5 @@ MDMServiceHelper.callMicroServiceFuture('AccountCreated', '{"accountId" : "<loca
 
 ### Invocable Asynchronously from flow
 ```
-MDMMicroServiceHelperInvoke.callMicroServiceFuture('AccountCreated', '{"accountId" : "<local system id of the account>", "context" : "<account, vendor, broker, customer, guarantor>"}, "recordId");
+MDMMicroServiceHelperInvoke.callMicroServiceFuture(List<MDMMicroServiceHelperWrapper> wrappers);
 ```
