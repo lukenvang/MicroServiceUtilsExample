@@ -40,8 +40,8 @@ public class MDMMicroServiceQueueable implements Queueable, Database.AllowsCallo
             for(MDMMicroServiceHelperWrapper wrapper : wrappers){
                 wrapperMap.put(wrapper.recordId, wrapper);
             }
-            temp = wrapperMap;
         }
+        temp = wrapperMap;
         HttpRest.insertLogsAtEnd = false;
         
         Integer count = 0;
