@@ -23,7 +23,7 @@ public class MDMMicroServiceHelperInvokeQueueable {
     * @param wrappers 
     **/
     @InvocableMethod(label='Perform Call Out to MDM Microservices' description='Performs queueable call out to MDM microservices' callout=true)
-    public static void callMicroServiceFuture(List<MDMMicroServiceHelperWrapper> wrappers)
+    public static void callMicroServiceQueueable(List<MDMMicroServiceHelperWrapper> wrappers)
     {
         MDMMicroServiceQueueable queueable = new MDMMicroServiceQueueable(wrappers);
         System.enqueueJob(queueable);
