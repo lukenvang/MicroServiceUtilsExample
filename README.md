@@ -41,12 +41,23 @@ MDMMicroServiceHelperInvoke.callMDMMicroService(List<MDMMicroServiceHelperWrappe
 ```
 
 
-### Asynchronously 
+### Asynchronously  Future
 ```
 MDMServiceHelper.callMicroServiceFuture('AccountCreated', '{"accountId" : "<local system id of the account>", "context" : "<account, vendor, broker, customer, guarantor>"}, "recordId");
 ```
 
-### Invocable Asynchronously from flow
+### Invocable Future Asynchronously from flow
 ```
 MDMMicroServiceHelperInvoke.callMicroServiceFuture(List<MDMMicroServiceHelperWrapper> wrappers);
+```
+
+### Asynchronously  Queueable
+```
+ MDMMicroServiceQueueable queueable = new MDMMicroServiceQueueable(List<MDMMicroServiceHelperWrapper> wrappers);
+ System.enqueueJob(queueable);
+```
+
+### Invocable Queueable Asynchronously from flow
+```
+MDMMicroServiceHelperInvoke.callMicroServiceQueueable(List<MDMMicroServiceHelperWrapper> wrappers);
 ```
