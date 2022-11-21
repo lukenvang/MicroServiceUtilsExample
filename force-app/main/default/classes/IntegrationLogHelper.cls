@@ -8,7 +8,7 @@ Created Date: 2022-11-16
 
 Created By: Luke Vang
 
-Test Class(es): IntegrationLogHelper_Test
+Test Class(es): IntegrationLogHelper_Test 100%
 
 Revision Log:
 
@@ -50,8 +50,8 @@ public class IntegrationLogHelper {
         }
         System.debug(ex.getMessage());
         System.debug(ex.getStackTraceString());
-        String status = 'Exception message --->>:: ' + ex.getMessage() + ' At Line Number :: ' + ex.getLineNumber();
-        integrationLogs.add(new Integration_Log__c(Status__c = status, Record_Id__c = recordId, Org_Name__c = UserInfo.getOrganizationId(), Object_API_NAme__c = String.valueOf(recordId.getSobjectType())));
+        String stackTrace = 'Exception message --->>:: ' + ex.getMessage() + ' At Stack Trace :: ' + ex.getStackTraceString();
+        integrationLogs.add(new Integration_Log__c(Stack_Trace__c = stackTrace, Record_Id__c = recordId, Org_Name__c = UserInfo.getOrganizationId(), Object_API_NAme__c = String.valueOf(recordId.getSobjectType())));
     }
     
     /**

@@ -22,4 +22,15 @@ public class MDMMicroServiceHelperWrapper {
     public String requestBody;
     @InvocableVariable
     public String recordId;
+    
+    public MDMMicroServiceHelperWrapper()
+    {
+    }
+    
+    public MDMMicroServiceHelperWrapper(String serviceName, String requestBody, String recordId)
+    {
+        this.serviceName = serviceName;
+        this.requestBody = requestBody;
+        this.recordId = recordId;
+    }
 }

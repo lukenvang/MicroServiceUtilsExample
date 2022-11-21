@@ -8,7 +8,7 @@ Created Date: 2022-11-16
 
 Created By: Luke Vang
 
-Test Class(es): MDMMicroServiceQueueable_Test
+Test Class(es): MDMMicroServiceHlperInvkeQueue_Test
 
 Revision Log:
 
@@ -17,7 +17,7 @@ Developer Name: Luke Vang
 **********************************************************************************************************************/
 public class MDMMicroServiceQueueable implements Queueable, Database.AllowsCallouts {
     
-    public List<MDMMicroServiceHelperWrapper> wrappers;
+    List<MDMMicroServiceHelperWrapper> wrappers;
     Map<String, MDMMicroServiceHelperWrapper> wrapperMap;
     
     public MDMMicroServiceQueueable(List<MDMMicroServiceHelperWrapper> wrappers){
@@ -31,9 +31,8 @@ public class MDMMicroServiceQueueable implements Queueable, Database.AllowsCallo
     
     public void execute(QueueableContext context) {
         Map<String, MDMMicroServiceHelperWrapper> temp = new Map<String, MDMMicroServiceHelperWrapper>();
-        if(wrappers.isEmpty()){
-            return;
-        }
+        if(wrappers.isEmpty())  return;
+           
         if(wrapperMap == null)
         {
             wrapperMap = new Map<String, MDMMicroServiceHelperWrapper>();
@@ -46,14 +45,13 @@ public class MDMMicroServiceQueueable implements Queueable, Database.AllowsCallo
         
         Integer count = 0;
         for(MDMMicroServiceHelperWrapper wrapper : wrappers){
-            if(count > 100){
-                break;
-            }
+            if(count > 99) break;
+
             MDMServiceHelper.callMicroService(wrapper.serviceName, wrapper.requestBody, wrapper.recordId);
             temp.remove(wrapper.recordId);
             count++;
         }
-         IntegrationLogHelper.insertIntegrationLogs();
+        IntegrationLogHelper.insertIntegrationLogs();
         if(!temp.isEmpty()){
             MDMMicroServiceQueueable queueable = new MDMMicroServiceQueueable(temp);
             System.enqueueJob(queueable);

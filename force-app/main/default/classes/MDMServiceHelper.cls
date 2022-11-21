@@ -8,7 +8,7 @@
 
    Created By: Luke Vang
 
-   Test Class(es): MDMServiceHelper_Test
+   Test Class(es): MDMMicroServiceHelperInvoke_Test, MDMMicroServiceHelperInvokeFuture_Test, MDMMicroServiceHlperInvkeQueue_Test
 
    Revision Log:
 
@@ -22,7 +22,20 @@ public class MDMServiceHelper {
 
     public class MDMServiceHelperException extends Exception {}
 
+	
+    /**
+     * @description Called from MDMMicroServiceHelperInvokeQueueable. Calls APIs Calls APIs asynchronously as queueable job.
+     * @author lvang@northteq.com | 11-16-2022
+     * @param wrappers
+     * @return List<String>
+     **/
 
+    public static void callMiroServiceQueueable(List<MDMMicroServiceHelperWrapper> wrappers)
+    {
+        MDMMicroServiceQueueable queueable = new MDMMicroServiceQueueable(wrappers);
+        System.enqueueJob(queueable);
+    }
+    
     /**
      * @description Called from MDMMicroServiceHelperInvoke. Calls APIs synchronously and inserts logs at the end of all calls.
      * @author lvang@northteq.com | 11-16-2022
@@ -56,9 +69,8 @@ public class MDMServiceHelper {
     public static void callMicroServiceFuture(List<MDMMicroServiceHelperWrapper> wrappers)
     {
         //if more than 50 just stop making the call, as you can only have 50 future calls per transaction
-        if(wrappers.size() > 50) {
-            throw new MDMServiceHelperException('If more than 50 records need to be processed to call MDM service in future, use MDMMicroServiceHelperInvokeQueueable.');
-        }
+        if(wrappers.size() > 50) throw new MDMServiceHelperException('If more than 50 records need to be processed to call MDM service in future, use MDMMicroServiceHelperInvokeQueueable.');
+        
         for(MDMMicroServiceHelperWrapper wrapper : wrappers)
         {
             callMicroServiceFuture(wrapper.serviceName, wrapper.requestBody, wrapper.recordId);
@@ -67,7 +79,7 @@ public class MDMServiceHelper {
 
  
     /**
-    * @description Use this to mdm services synchronously 
+    * @description Use this to mdm services synchronously
     * @author lvang@northteq.com | 11-16-2022 
     * @param serviceName 
     * @param requestBody 
@@ -75,6 +87,7 @@ public class MDMServiceHelper {
     * @return String 
     **/
     public static String callMicroService(String serviceName, String requestBody, Id recordId){
+        getIntegrationSettings(serviceName);
         requestBody = addSourceIdToRequest(requestBody);
         return makeHttpCallOut(serviceName, requestBody, recordId);
     }
@@ -90,6 +103,7 @@ public class MDMServiceHelper {
     @future(callout=true)
     public static void callMicroServiceFuture(String serviceName, String requestBody, Id recordId)
     {
+        getIntegrationSettings(serviceName);
         requestBody = addSourceIdToRequest(requestBody);
         makeHttpCallOut(serviceName, requestBody, recordId);
     }
@@ -103,7 +117,6 @@ public class MDMServiceHelper {
     * @return String 
     **/
     private static String makeHttpCallOut(String serviceName, String requestBody, Id recordId){
-        getIntegrationSettings(serviceName);
         Map<String, String> headerMap;
         if(!String.isBlank(integrationSetting.API_Key__c))
         {

@@ -8,7 +8,7 @@ Created Date: 2022-11-16
 
 Created By: Luke Vang
 
-Test Class(es): MDMMicroServiceHelperInvokeQueueable_Test
+Test Class(es): MDMMicroServiceHlperInvkeQueue_Test
 
 Revision Log:
 
@@ -23,9 +23,8 @@ public class MDMMicroServiceHelperInvokeQueueable {
     * @param wrappers 
     **/
     @InvocableMethod(label='Perform Call Out to MDM Microservices' description='Performs queueable call out to MDM microservices' callout=true)
-    public static void callMicroServiceQueueable(List<MDMMicroServiceHelperWrapper> wrappers)
+    public static void callMicroServiceFuture(List<MDMMicroServiceHelperWrapper> wrappers)
     {
-        MDMMicroServiceQueueable queueable = new MDMMicroServiceQueueable(wrappers);
-        System.enqueueJob(queueable);
+        MDMServiceHelper.callMiroServiceQueueable(wrappers);
     }
 }
