@@ -122,7 +122,7 @@ public class MDMServiceHelper {
         {
             headerMap = new Map<String, String> { 'Authorization' => 'Bearer ' + integrationSetting.API_Key__c};
         }
-        String response = HttpRest.doCallout(integrationSetting.End_Point__c, requestBody, 'POST', recordId, headerMap);
+        String response = HttpRest.doCallout(integrationSetting.End_Point__c, requestBody, integrationSetting.Method__c, recordId, headerMap);
         return response;
     }
 
@@ -138,7 +138,7 @@ public class MDMServiceHelper {
             integrationSetting = integrationSettingsMap.get(serviceName);
         }
         List<Integration_Setting__mdt> intergrationSettings = [
-            SELECT API_Key__c, End_Point__c, Source_Id__c
+            SELECT API_Key__c, End_Point__c, Source_Id__c, Method__c
             FROM Integration_Setting__mdt
             WHERE End_Point__c != null AND Endpoint_Enabled__c =: true AND MasterLabel =: serviceName AND Environment__c =: environmentType
         ];
